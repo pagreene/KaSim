@@ -885,110 +885,110 @@ Quarks:site_modif-:agent_type:0,site_type:2,state:1,rule:15->[0]
 Quarks:site_modif-:agent_type:0,site_type:2,state:1,rule:19->[0]
 Refining the influence map...
 Influence_map: The notation [i -> j] means an agent at position [i] of the first rule/var has an influence to an agent at position [j] of the second rule/var.
-Influence_map:Wake_up_map:rule(0):'' A(x~u,y~u,z~u)->A(x~p,y~u,z~u) -> rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(0):'' A(x~u,y~u,z~u)->A(x~p,y~u,z~u) -> rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u)[0->0]
 Influence_map:Wake_up_map:rule(0):'' A(x~u,y~u,z~u)->A(x~p,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
 Influence_map:Wake_up_map:rule(0):'' A(x~u,y~u,z~u)->A(x~p,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u) -> rule(0):'' A(x~u,y~u,z~u)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u) -> rule(0):'' A(x~u,y~u,z~u)->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
 Influence_map:Wake_up_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u) -> rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u) -> rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
 Influence_map:Wake_up_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u) -> rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u) -> rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
 Influence_map:Wake_up_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u) -> rule(2):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u) -> rule(3):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u) -> rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u) -> rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u) -> rule(2):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u) -> rule(3):'' A(x~u,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u) -> rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u) -> rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
 Influence_map:Wake_up_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p) -> rule(4):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p) -> rule(5):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p) -> rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p) -> rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p) -> rule(4):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p) -> rule(5):'' A(x~u,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p) -> rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p) -> rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p)[0->0]
 Influence_map:Wake_up_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u) -> rule(2):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u) -> rule(3):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u) -> rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u) -> rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u) -> rule(2):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u) -> rule(3):'' A(x~u,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u) -> rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u) -> rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p)[0->0]
 Influence_map:Wake_up_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p) -> rule(4):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p) -> rule(5):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p) -> rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p) -> rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u) -> rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Wake_up_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Wake_up_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Wake_up_map:rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p) -> rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Wake_up_map:rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Inhibition_map:rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p) -> rule(4):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p) -> rule(5):'' A(x~u,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p) -> rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p) -> rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u) -> rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u)[0->0]
+Influence_map:Wake_up_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p)[0->0]
+Influence_map:Wake_up_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Wake_up_map:rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p) -> rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Wake_up_map:rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u)[0->0]
 Influence_map:Inhibition_map:rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u) -> rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u) -> rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Inhibition_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(1):'' A(x~p,y~u,z~u)->A(x~u,y~u,z~u)[0->0]
+Influence_map:Inhibition_map:rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u) -> rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(1):'' A(x~p,y~u,z~u)<->A(x~u,y~u,z~u)[0->0]
 Influence_map:Inhibition_map:rule(8):'' A(x~p,y~u,z~u)->A(x~p,y~u,z~p) -> rule(6):'' A(x~p,y~u,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u) -> rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u) -> rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
 Influence_map:Inhibition_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(2):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(3):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(3):'' A(x~u,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
 Influence_map:Inhibition_map:rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u) -> rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Inhibition_map:rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Inhibition_map:rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u) -> rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Inhibition_map:rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u) -> rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p)[0->0]
 Influence_map:Inhibition_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(4):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(5):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(5):'' A(x~u,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
 Influence_map:Inhibition_map:rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p) -> rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Inhibition_map:rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Inhibition_map:rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p) -> rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Inhibition_map:rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p) -> rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p)[0->0]
 Influence_map:Inhibition_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(2):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(3):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(3):'' A(x~u,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
 Influence_map:Inhibition_map:rule(14):'' A(x~u,y~p,z~u)->A(x~u,y~p,z~p) -> rule(10):'' A(x~u,y~p,z~u)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u) -> rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u) -> rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
 Influence_map:Inhibition_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(4):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(5):'' A(x~u,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(5):'' A(x~u,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
 Influence_map:Inhibition_map:rule(16):'' A(x~u,y~u,z~p)->A(x~u,y~p,z~p) -> rule(12):'' A(x~u,y~u,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p) -> rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
-Influence_map:Inhibition_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(7):'' A(x~p,y~p,z~u)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Inhibition_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(11):'' A(x~p,y~p,z~u)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u) -> rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p)[0->0]
-Influence_map:Inhibition_map:rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u) -> rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)->A(x~u,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(9):'' A(x~p,y~u,z~p)->A(x~p,y~u,z~u)[0->0]
-Influence_map:Inhibition_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(13):'' A(x~p,y~u,z~p)->A(x~u,y~u,z~p)[0->0]
-Influence_map:Inhibition_map:rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p) -> rule(19):'' A(x~p,y~p,z~p)->A(x~p,y~p,z~u)[0->0]
-Influence_map:Inhibition_map:rule(23):'' A(x~p,y~p,z~p)->A(x~p,y~u,z~p) -> rule(21):'' A(x~p,y~p,z~p)->A(x~u,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p) -> rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p) -> rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(7):'' A(x~p,y~p,z~u)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Inhibition_map:rule(18):'' A(x~p,y~p,z~u)->A(x~p,y~p,z~p) -> rule(11):'' A(x~p,y~p,z~u)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u) -> rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p)[0->0]
+Influence_map:Inhibition_map:rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u) -> rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(15):'' A(x~u,y~p,z~p)<->A(x~u,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(20):'' A(x~u,y~p,z~p)->A(x~p,y~p,z~p) -> rule(17):'' A(x~u,y~p,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p) -> rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p) -> rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(9):'' A(x~p,y~u,z~p)<->A(x~p,y~u,z~u)[0->0]
+Influence_map:Inhibition_map:rule(22):'' A(x~p,y~u,z~p)->A(x~p,y~p,z~p) -> rule(13):'' A(x~p,y~u,z~p)<->A(x~u,y~u,z~p)[0->0]
+Influence_map:Inhibition_map:rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p) -> rule(19):'' A(x~p,y~p,z~p)<->A(x~p,y~p,z~u)[0->0]
+Influence_map:Inhibition_map:rule(23):'' A(x~p,y~p,z~p)<->A(x~p,y~u,z~p) -> rule(21):'' A(x~p,y~p,z~p)<->A(x~u,y~p,z~p)[0->0]
 Reachability analysis...
 	Views in initial state:
 
@@ -1030,10 +1030,10 @@ EXTENSIONAL DESCRIPTION:
 		A(x~u,y~u,z~u)
 
 
-	Applying rule A(x~u,y~u,z~u) <-> A(x~p,y~u,z~u) @ 1, 2 (File "sym1.ka", line 1, characters 0-39:):
+	Applying rule A(x~u,y~u,z~u) -> A(x~p,y~u,z~u) @ 1 , 2 (File "sym1.ka", line 1, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~u,z~u) <-> A(x~p,y~u,z~u) @ 1, 2 (File "sym1.ka", line 1, characters 0-39:) is applied for the first time
+		rule A(x~u,y~u,z~u) -> A(x~p,y~u,z~u) @ 1 , 2 (File "sym1.ka", line 1, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1075,29 +1075,29 @@ EXTENSIONAL DESCRIPTION:
 		A(x~p,y~u,z~u)
 
 
-	Applying rule A(x~u,y~u,z~u) <-> A(x~p,y~u,z~u) @ 1, 2 (File "sym1.ka", line 1, characters 0-39:):
+	Applying rule A(x~u,y~u,z~u) <- A(x~p,y~u,z~u) @ 1 , 2 (File "sym1.ka", line 1, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~u,z~u) <-> A(x~p,y~u,z~u) @ 1, 2 (File "sym1.ka", line 1, characters 0-39:) is applied for the first time
+		rule A(x~u,y~u,z~u) <- A(x~p,y~u,z~u) @ 1 , 2 (File "sym1.ka", line 1, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~u) @ 1, 2 (File "sym1.ka", line 2, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) -> A(x~u,y~p,z~u) @ 1 , 2 (File "sym1.ka", line 2, characters 0-39:):
 		the precondition is not satisfied yet
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~u) @ 1, 2 (File "sym1.ka", line 2, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) <- A(x~u,y~p,z~u) @ 1 , 2 (File "sym1.ka", line 2, characters 0-39:):
 		the precondition is not satisfied yet
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~u,z~p) @ 1, 2 (File "sym1.ka", line 3, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) -> A(x~u,y~u,z~p) @ 1 , 2 (File "sym1.ka", line 3, characters 0-39:):
 		the precondition is not satisfied yet
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~u,z~p) @ 1, 2 (File "sym1.ka", line 3, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) <- A(x~u,y~u,z~p) @ 1 , 2 (File "sym1.ka", line 3, characters 0-39:):
 		the precondition is not satisfied yet
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 5, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) -> A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 5, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~u,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 5, characters 0-39:) is applied for the first time
+		rule A(x~p,y~u,z~u) -> A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 5, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1139,17 +1139,17 @@ EXTENSIONAL DESCRIPTION:
 		A(x~p,y~p,z~u)
 
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 5, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) <- A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 5, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~u,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 5, characters 0-39:) is applied for the first time
+		rule A(x~p,y~u,z~u) <- A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 5, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 6, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) -> A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 6, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~u,z~u) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 6, characters 0-39:) is applied for the first time
+		rule A(x~p,y~u,z~u) -> A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 6, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1191,20 +1191,20 @@ EXTENSIONAL DESCRIPTION:
 		A(x~p,y~u,z~p)
 
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 6, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) <- A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 6, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~u,z~u) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 6, characters 0-39:) is applied for the first time
+		rule A(x~p,y~u,z~u) <- A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 6, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 7, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) -> A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 7, characters 0-39:):
 		the precondition is not satisfied yet
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 7, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) <- A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 7, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~p,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 7, characters 0-39:) is applied for the first time
+		rule A(x~u,y~p,z~u) <- A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 7, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1246,13 +1246,13 @@ EXTENSIONAL DESCRIPTION:
 		A(x~u,y~p,z~u)
 
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 9, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) -> A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 9, characters 0-39:):
 		the precondition is not satisfied yet
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 9, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) <- A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 9, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~u,z~p) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 9, characters 0-39:) is applied for the first time
+		rule A(x~u,y~u,z~p) <- A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 9, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1294,10 +1294,10 @@ EXTENSIONAL DESCRIPTION:
 		A(x~u,y~u,z~p)
 
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 10, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) -> A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 10, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 10, characters 0-39:) is applied for the first time
+		rule A(x~u,y~p,z~u) -> A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 10, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1339,31 +1339,31 @@ EXTENSIONAL DESCRIPTION:
 		A(x~u,y~p,z~p)
 
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 10, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) <- A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 10, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 10, characters 0-39:) is applied for the first time
+		rule A(x~u,y~p,z~u) <- A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 10, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 11, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) -> A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 11, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~u,z~p) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 11, characters 0-39:) is applied for the first time
+		rule A(x~u,y~u,z~p) -> A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 11, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 11, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) <- A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 11, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~u,z~p) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 11, characters 0-39:) is applied for the first time
+		rule A(x~u,y~u,z~p) <- A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 11, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~p,z~u) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 13, characters 0-39:):
+	Applying rule A(x~p,y~p,z~u) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 13, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~p,z~u) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 13, characters 0-39:) is applied for the first time
+		rule A(x~p,y~p,z~u) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 13, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
@@ -1405,144 +1405,144 @@ EXTENSIONAL DESCRIPTION:
 		A(x~p,y~p,z~p)
 
 
-	Applying rule A(x~p,y~p,z~u) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 13, characters 0-39:):
+	Applying rule A(x~p,y~p,z~u) <- A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 13, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~p,z~u) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 13, characters 0-39:) is applied for the first time
+		rule A(x~p,y~p,z~u) <- A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 13, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 14, characters 0-39:):
+	Applying rule A(x~u,y~p,z~p) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 14, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~p,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 14, characters 0-39:) is applied for the first time
+		rule A(x~u,y~p,z~p) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 14, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 14, characters 0-39:):
+	Applying rule A(x~u,y~p,z~p) <- A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 14, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~p,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 14, characters 0-39:) is applied for the first time
+		rule A(x~u,y~p,z~p) <- A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 14, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~u,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 15, characters 0-39:):
+	Applying rule A(x~p,y~u,z~p) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 15, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~u,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 15, characters 0-39:) is applied for the first time
+		rule A(x~p,y~u,z~p) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 15, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~u,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 15, characters 0-39:):
+	Applying rule A(x~p,y~u,z~p) <- A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 15, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~p,y~u,z~p) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 15, characters 0-39:) is applied for the first time
+		rule A(x~p,y~u,z~p) <- A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 15, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~u) <-> A(x~p,y~u,z~u) @ 1, 2 (File "sym1.ka", line 1, characters 0-39:):
-		the precondition is satisfied
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~u,y~u,z~u) <-> A(x~p,y~u,z~u) @ 1, 2 (File "sym1.ka", line 1, characters 0-39:):
+	Applying rule A(x~u,y~u,z~u) -> A(x~p,y~u,z~u) @ 1 , 2 (File "sym1.ka", line 1, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~u) @ 1, 2 (File "sym1.ka", line 2, characters 0-39:):
-		the precondition is satisfied
-
-		rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~u) @ 1, 2 (File "sym1.ka", line 2, characters 0-39:) is applied for the first time
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~u) @ 1, 2 (File "sym1.ka", line 2, characters 0-39:):
-		the precondition is satisfied
-
-		rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~u) @ 1, 2 (File "sym1.ka", line 2, characters 0-39:) is applied for the first time
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~u,z~p) @ 1, 2 (File "sym1.ka", line 3, characters 0-39:):
-		the precondition is satisfied
-
-		rule A(x~u,y~u,z~p) <-> A(x~u,y~u,z~p) @ 1, 2 (File "sym1.ka", line 3, characters 0-39:) is applied for the first time
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~u,z~p) @ 1, 2 (File "sym1.ka", line 3, characters 0-39:):
-		the precondition is satisfied
-
-		rule A(x~u,y~u,z~p) <-> A(x~u,y~u,z~p) @ 1, 2 (File "sym1.ka", line 3, characters 0-39:) is applied for the first time
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 5, characters 0-39:):
+	Applying rule A(x~u,y~u,z~u) <- A(x~p,y~u,z~u) @ 1 , 2 (File "sym1.ka", line 1, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 5, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) -> A(x~u,y~p,z~u) @ 1 , 2 (File "sym1.ka", line 2, characters 0-39:):
+		the precondition is satisfied
+
+		rule A(x~u,y~p,z~u) -> A(x~u,y~p,z~u) @ 1 , 2 (File "sym1.ka", line 2, characters 0-39:) is applied for the first time
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~u,y~p,z~u) <- A(x~u,y~p,z~u) @ 1 , 2 (File "sym1.ka", line 2, characters 0-39:):
+		the precondition is satisfied
+
+		rule A(x~u,y~p,z~u) <- A(x~u,y~p,z~u) @ 1 , 2 (File "sym1.ka", line 2, characters 0-39:) is applied for the first time
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~u,y~u,z~p) -> A(x~u,y~u,z~p) @ 1 , 2 (File "sym1.ka", line 3, characters 0-39:):
+		the precondition is satisfied
+
+		rule A(x~u,y~u,z~p) -> A(x~u,y~u,z~p) @ 1 , 2 (File "sym1.ka", line 3, characters 0-39:) is applied for the first time
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~u,y~u,z~p) <- A(x~u,y~u,z~p) @ 1 , 2 (File "sym1.ka", line 3, characters 0-39:):
+		the precondition is satisfied
+
+		rule A(x~u,y~u,z~p) <- A(x~u,y~u,z~p) @ 1 , 2 (File "sym1.ka", line 3, characters 0-39:) is applied for the first time
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~p,y~u,z~u) -> A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 5, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 6, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) <- A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 5, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~u,z~u) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 6, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) -> A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 6, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 7, characters 0-39:):
-		the precondition is satisfied
-
-		rule A(x~u,y~p,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 7, characters 0-39:) is applied for the first time
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~u,y~p,z~u) <-> A(x~p,y~p,z~u) @ 2, 4 (File "sym1.ka", line 7, characters 0-39:):
+	Applying rule A(x~p,y~u,z~u) <- A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 6, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 9, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) -> A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 7, characters 0-39:):
 		the precondition is satisfied
 
-		rule A(x~u,y~u,z~p) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 9, characters 0-39:) is applied for the first time
+		rule A(x~u,y~p,z~u) -> A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 7, characters 0-39:) is applied for the first time
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~p,y~u,z~p) @ 2, 4 (File "sym1.ka", line 9, characters 0-39:):
-		the precondition is satisfied
-
-		Updating the views for A(x~,y~,z~)
-
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 10, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) <- A(x~p,y~p,z~u) @ 2 , 4 (File "sym1.ka", line 7, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~p,z~u) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 10, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) -> A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 9, characters 0-39:):
+		the precondition is satisfied
+
+		rule A(x~u,y~u,z~p) -> A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 9, characters 0-39:) is applied for the first time
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~u,y~u,z~p) <- A(x~p,y~u,z~p) @ 2 , 4 (File "sym1.ka", line 9, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 11, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) -> A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 10, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~u,y~u,z~p) <-> A(x~u,y~p,z~p) @ 2, 4 (File "sym1.ka", line 11, characters 0-39:):
+	Applying rule A(x~u,y~p,z~u) <- A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 10, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
 
-	Applying rule A(x~p,y~p,z~u) <-> A(x~p,y~p,z~p) @ 3, 6 (File "sym1.ka", line 13, characters 0-39:):
+	Applying rule A(x~u,y~u,z~p) -> A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 11, characters 0-39:):
+		the precondition is satisfied
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~u,y~u,z~p) <- A(x~u,y~p,z~p) @ 2 , 4 (File "sym1.ka", line 11, characters 0-39:):
+		the precondition is satisfied
+
+		Updating the views for A(x~,y~,z~)
+
+	Applying rule A(x~p,y~p,z~u) -> A(x~p,y~p,z~p) @ 3 , 6 (File "sym1.ka", line 13, characters 0-39:):
 		the precondition is satisfied
 
 		Updating the views for A(x~,y~,z~)
