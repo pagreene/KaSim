@@ -544,7 +544,7 @@ let print_ast_edit_rule f r =
 
 let print_ast_rule f ?direction r =
   Format.fprintf
-    f "@[<h>%a %a@ %a %a%t]"
+    f "@[<h>%a %a@ %a @@ %a%t@]"
     (print_one_size r.rm_token) r.lhs
     (fun f r ->
        match direction with
