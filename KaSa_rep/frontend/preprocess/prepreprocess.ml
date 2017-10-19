@@ -582,10 +582,15 @@ let map_with_pos map =
 
 let alg_with_pos_map = map_with_pos alg_map
 
-let modif_map f_forbidding_question_marks f_allowing_question_marks error alg =
+let modif_map f_rule
+    f_forbidding_question_marks f_allowing_question_marks error alg =
   match
     alg
   with
+  | Ast.APPLY (alg,mixture) ->
+    let error,alg' = (map_with_pos alg_map) f_allowing_question_marks error alg in
+    let error,mixture' = f_rule error mixture in
+    error,Ast.APPLY(alg',mixture')
   | Ast.INTRO (alg,(mixture,pos)) ->
     let error,alg' = (map_with_pos alg_map) f_allowing_question_marks error alg in
     let error,mixture' = f_forbidding_question_marks error mixture in
@@ -751,6 +756,45 @@ let dump_rule_no_rate rule =
     Buffer.contents buf
 
 let translate_compil parameters error compil =
+  let translate_rule error (rule,p) =
+    let (ast_lhs,ast_rhs),(prefix,tail_lhs,tail_rhs) =
+      match rule.Ast.rewrite with
+      | Ast.Edit e ->
+        let raw_lhs,raw_rhs,add,del = Ast.split_mixture e.Ast.mix in
+        (raw_lhs@del,raw_rhs@add),
+        (List.length raw_lhs, List.length del, List.length add)
+      | Ast.Arrow a ->
+        (a.Ast.lhs,a.Ast.rhs),
+        longuest_prefix a.Ast.lhs a.Ast.rhs in
+    let error,lhs =
+      refine_mixture_in_rule parameters error prefix 0 tail_rhs ast_lhs in
+    let error,rhs =
+      refine_mixture_in_rule parameters error prefix tail_lhs 0 ast_rhs in
+    let error,k_def =
+      alg_with_pos_map (refine_mixture parameters) error rule.Ast.k_def in
+    let error,k_un =
+      alg_with_pos_with_option_map (refine_mixture parameters) error (Tools_kasa.fst_option rule.Ast.k_un) in
+    let original_ast = dump_rule rule in
+    let original_ast_no_rate = dump_rule_no_rate rule in
+    let rule_direct = {rule with Ast.bidirectional = false} in
+
+    let direct_ast = dump_rule rule_direct in
+    let direct_ast_no_rate = dump_rule_no_rate rule_direct in
+    error,{
+      Ckappa_sig.position = p ;
+      Ckappa_sig.prefix = prefix ;
+      Ckappa_sig.interprete_delta = Ckappa_sig.Direct ;
+      Ckappa_sig.delta = tail_lhs ;
+      Ckappa_sig.lhs = lhs ;
+      Ckappa_sig.rhs =  rhs ;
+      Ckappa_sig.k_def = k_def ;
+      Ckappa_sig.k_un = k_un ;
+      Ckappa_sig.ast = direct_ast ;
+      Ckappa_sig.ast_no_rate = direct_ast_no_rate ;
+      Ckappa_sig.original_ast = original_ast ;
+      Ckappa_sig.original_ast_no_rate = original_ast_no_rate ;
+      Ckappa_sig.from_a_biderectional_rule = rule.Ast.bidirectional;
+    } in
   let id_set = Mods.StringSet.empty in
   let agent_set = Mods.StringSet.empty in
   let error,id_set,var_rev =
@@ -787,47 +831,7 @@ let translate_compil parameters error compil =
            | None -> error,id_set
            | Some id -> check_freshness parameters error "Label" (fst id) id_set
          in
-         let (ast_lhs,ast_rhs),(prefix,tail_lhs,tail_rhs) =
-           match rule.Ast.rewrite with
-           | Ast.Edit e ->
-             let raw_lhs,raw_rhs,add,del = Ast.split_mixture e.Ast.mix in
-             (raw_lhs@del,raw_rhs@add),
-             (List.length raw_lhs, List.length del, List.length add)
-           | Ast.Arrow a ->
-             (a.Ast.lhs,a.Ast.rhs),
-             longuest_prefix a.Ast.lhs a.Ast.rhs in
-         let error,lhs =
-           refine_mixture_in_rule parameters error prefix 0 tail_rhs ast_lhs in
-         let error,rhs =
-           refine_mixture_in_rule parameters error prefix tail_lhs 0 ast_rhs in
-         let error,k_def =
-           alg_with_pos_map (refine_mixture parameters) error rule.Ast.k_def in
-         let error,k_un =
-           alg_with_pos_with_option_map (refine_mixture parameters) error (Tools_kasa.fst_option rule.Ast.k_un) in
-         let original_ast = dump_rule rule in
-         let original_ast_no_rate = dump_rule_no_rate rule in
-         let rule_direct = {rule with Ast.bidirectional = false} in
-
-         let direct_ast = dump_rule rule_direct in
-         let direct_ast_no_rate = dump_rule_no_rate rule_direct in
-         let error,direct =
-           error,
-           {
-             Ckappa_sig.position = p ;
-             Ckappa_sig.prefix = prefix ;
-             Ckappa_sig.interprete_delta = Ckappa_sig.Direct ;
-             Ckappa_sig.delta = tail_lhs ;
-             Ckappa_sig.lhs = lhs ;
-             Ckappa_sig.rhs =  rhs ;
-             Ckappa_sig.k_def = k_def ;
-             Ckappa_sig.k_un = k_un ;
-             Ckappa_sig.ast = direct_ast ;
-             Ckappa_sig.ast_no_rate = direct_ast_no_rate ;
-             Ckappa_sig.original_ast = original_ast ;
-             Ckappa_sig.original_ast_no_rate = original_ast_no_rate ;
-             Ckappa_sig.from_a_biderectional_rule = rule.Ast.bidirectional;
-           }
-         in
+         let error,direct = translate_rule error (rule,p) in
          if rule.Ast.bidirectional then
            let rewrite = match rule.Ast.rewrite with
              | Ast.Edit _ -> failwith "bidirectional edit rules are impossible"
@@ -863,17 +867,18 @@ let translate_compil parameters error compil =
              error,
              {
                Ckappa_sig.position = p ;
-               Ckappa_sig.prefix = prefix ;
-               Ckappa_sig.delta = tail_lhs ;
+               Ckappa_sig.prefix = direct.Ckappa_sig.prefix ;
+               Ckappa_sig.delta = direct.Ckappa_sig.delta ;
                Ckappa_sig.interprete_delta = Ckappa_sig.Reverse ;
-               Ckappa_sig.lhs = rhs ;
-               Ckappa_sig.rhs =  lhs ;
+               Ckappa_sig.lhs = direct.Ckappa_sig.rhs ;
+               Ckappa_sig.rhs =  direct.Ckappa_sig.lhs ;
                Ckappa_sig.k_def = k_op ;
                Ckappa_sig.k_un = k_op_un ;
                Ckappa_sig.ast = reverse_ast ;
                Ckappa_sig.ast_no_rate = reverse_ast_no_rate ;
-               Ckappa_sig.original_ast = original_ast ;
-               Ckappa_sig.original_ast_no_rate = original_ast_no_rate ;
+               Ckappa_sig.original_ast = direct.Ckappa_sig.original_ast ;
+               Ckappa_sig.original_ast_no_rate =
+                 direct.Ckappa_sig.original_ast_no_rate ;
                Ckappa_sig.from_a_biderectional_rule = rule.Ast.bidirectional ;
              }
            in
@@ -910,6 +915,10 @@ let translate_compil parameters error compil =
            List.fold_left
              (fun (error,list) m ->
                 match m with
+                | Ast.APPLY (a,(_,p as r)) ->
+                  let error,a' = alg_with_pos_map (refine_mixture parameters) error a in
+                  let error,m' = translate_rule error r in
+                  error,Ast.APPLY(a',(m',p))::list
                 | Ast.INTRO (a,(m,p)) ->
                   let error,a' = alg_with_pos_map (refine_mixture parameters) error a in
                   let error,m' = refine_mixture parameters error (rev_ast m) in

@@ -448,6 +448,11 @@ let scan_perts scan_mixt parameters =
        List.fold_left
          (fun remanent m ->
             match m with
+            | Ast.APPLY (_,(r,_)) ->
+              scan_mixture
+                parameters
+                (scan_mixt parameters remanent r.Ckappa_sig.lhs)
+                r.Ckappa_sig.rhs
             | (Ast.INTRO (_,(m,_)) | Ast.DELETE(_,(m,_))
               | Ast.CFLOWMIX (_,(m,_))) | Ast.SPECIES_OF (_,_,(m,_))->
               scan_mixt parameters remanent m

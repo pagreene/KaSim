@@ -84,7 +84,9 @@ type rule = {
 
 let flip_label str = str^"_op"
 
-type ('pattern,'mixture,'id) modif_expr =
+type ('pattern,'mixture,'id,'rule) modif_expr =
+  | APPLY of
+      (('pattern,'id) Alg_expr.e Locality.annot * 'rule Locality.annot)
   | INTRO of
       (('pattern,'id) Alg_expr.e Locality.annot * 'mixture Locality.annot)
   | DELETE of
@@ -110,10 +112,10 @@ type ('pattern,'mixture,'id) modif_expr =
       (bool * ('pattern,'id) Alg_expr.e Primitives.print_expr list
        * 'pattern Locality.annot)
 
-type ('pattern,'mixture,'id) perturbation =
+type ('pattern,'mixture,'id,'rule) perturbation =
   (Nbr.t option *
    ('pattern,'id) Alg_expr.bool Locality.annot option *
-   (('pattern,'mixture,'id) modif_expr list) *
+   (('pattern,'mixture,'id,'rule) modif_expr list) *
    ('pattern,'id) Alg_expr.bool Locality.annot option) Locality.annot
 
 type configuration = string Locality.annot * (string Locality.annot list)
@@ -130,7 +132,7 @@ type ('pattern,'mixture,'id) init_statment =
   ('pattern,'id) Alg_expr.e Locality.annot *
   ('mixture,'id) init_t Locality.annot
 
-type ('pattern,'mixture,'id) instruction =
+type ('pattern,'mixture,'id,'rule) instruction =
   | SIG      of agent
   | TOKENSIG of string Locality.annot
   | VOLSIG   of string * float * string (* type, volume, parameter*)
@@ -142,12 +144,12 @@ type ('pattern,'mixture,'id) instruction =
   | DECLARE  of ('pattern,'id) variable_def
   | OBS      of ('pattern,'id) variable_def (*for backward compatibility*)
   | PLOT     of ('pattern,'id) Alg_expr.e Locality.annot
-  | PERT     of ('pattern,'mixture,'id) perturbation
+  | PERT     of ('pattern,'mixture,'id,'rule) perturbation
   | CONFIG   of configuration
 
-type ('pattern,'mixture,'id) command =
+type ('pattern,'mixture,'id,'rule) command =
   | RUN of ('pattern,'id) Alg_expr.bool Locality.annot
-  | MODIFY of ('pattern,'mixture,'id) modif_expr list
+  | MODIFY of ('pattern,'mixture,'id,'rule) modif_expr list
   | QUIT
 
 type ('agent,'pattern,'mixture,'id,'rule) compil =
@@ -171,7 +173,7 @@ type ('agent,'pattern,'mixture,'id,'rule) compil =
        ('mixture,'id) init_t Locality.annot) list;
     (*initial graph declaration*)
     perturbations :
-      ('pattern,'mixture,'id) perturbation list;
+      ('pattern,'mixture,'id,'rule) perturbation list;
     configurations :
       configuration list;
     tokens :
@@ -685,6 +687,12 @@ let rule_of_json filenames f_mix f_var = function
 
 
 let modif_to_json filenames f_mix f_var = function
+  | APPLY (alg,r) ->
+    `List [ `String "APPLY";
+            Locality.annot_to_yojson
+              ~filenames (Alg_expr.e_to_yojson ~filenames f_mix f_var) alg;
+            Locality.annot_to_yojson
+              ~filenames (rule_to_json filenames f_mix f_var) r ]
   | INTRO (alg,mix) ->
     `List [ `String "INTRO";
             Locality.annot_to_yojson
@@ -739,6 +747,12 @@ let modif_to_json filenames f_mix f_var = function
              Locality.annot_to_yojson ~filenames f_mix m ]
 
 let modif_of_json filenames f_mix f_var = function
+  | `List [ `String "APPLY"; alg; mix ] ->
+     APPLY
+       (Locality.annot_of_yojson
+          ~filenames (Alg_expr.e_of_yojson ~filenames f_mix f_var) alg,
+        Locality.annot_of_yojson
+          ~filenames (rule_of_json filenames f_mix f_var) mix)
   | `List [ `String "INTRO"; alg; mix ] ->
      INTRO
        (Locality.annot_of_yojson
@@ -842,30 +856,32 @@ let sig_from_inits =
        | _,_,(INIT_MIX m,_) -> (merge_agents ags m,toks)
        | _,na,(INIT_TOK t,pos) -> (ags,merge_tokens toks [na,(t,pos)]))
 
+let sig_from_rule (ags,toks) r =
+  match r.rewrite with
+  | Edit e -> (merge_agents ags e.mix, merge_tokens toks e.delta_token)
+  | Arrow a ->
+    let (ags',toks') =
+      if r.bidirectional then
+        (merge_agents ags a.rhs, merge_tokens toks a.add_token)
+      else (ags,toks) in
+    (merge_agents ags' a.lhs, merge_tokens toks' a.rm_token)
+
 let sig_from_rules =
-  List.fold_left
-    (fun (ags,toks) (_,(r,_)) ->
-       match r.rewrite with
-       | Edit e -> (merge_agents ags e.mix, merge_tokens toks e.delta_token)
-       | Arrow a ->
-         let (ags',toks') =
-           if r.bidirectional then
-             (merge_agents ags a.rhs, merge_tokens toks a.add_token)
-           else (ags,toks) in
-         (merge_agents ags' a.lhs, merge_tokens toks' a.rm_token))
+  List.fold_left (fun p (_,(r,_)) -> sig_from_rule p r)
 
 let sig_from_perts =
   List.fold_left
     (fun acc ((_,_,p,_),_) ->
        List.fold_left
-         (fun (ags,toks) -> function
+         (fun (ags,toks as p) -> function
+            | APPLY (_,(r,_)) -> sig_from_rule p r
             | INTRO (_,(m,_)) ->
               (merge_agents ags m,toks)
             | UPDATE_TOK (t,na) ->
               (ags,merge_tokens toks [na,t])
             | (DELETE _ | UPDATE _ | STOP _ | SNAPSHOT _ | PRINT _ | PLOTENTRY |
                CFLOWLABEL _ | CFLOWMIX _ | FLUX _ | FLUXOFF _ | SPECIES_OF _) ->
-               (ags,toks))
+               p)
          acc p)
 
 let implicit_signature r =

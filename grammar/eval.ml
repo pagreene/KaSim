@@ -254,6 +254,20 @@ let rule_effect ?bwd_bisim ~compileModeOn contact_map domain alg_expr
 let effects_of_modif
     ast_algs ast_rules origin ?bwd_bisim ~compileModeOn
     contact_map (domain,rev_effects) = function
+  | APPLY (alg_expr, (_,pos as pack)) ->
+    let (domain',alg_pos) =
+      compile_alg ?bwd_bisim ~compileModeOn contact_map domain alg_expr in
+    let domain'',_,elem_rules =
+      rules_of_ast ?bwd_bisim
+        ~compileModeOn contact_map domain' ~syntax_ref:0 pack in
+    let elem_rule = match elem_rules with
+      | [ r ] -> r
+      | _ ->
+        raise
+          (ExceptionDefn.Malformed_Decl
+             ("Ambiguous rule in perturbation is impossible",pos)) in
+    (domain'',
+     (Primitives.ITER_RULE (alg_pos, elem_rule))::rev_effects)
   | INTRO (alg_expr, (raw_mix,mix_pos)) ->
     rule_effect ?bwd_bisim ~compileModeOn contact_map domain alg_expr
       ([],raw_mix,[])

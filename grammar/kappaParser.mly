@@ -19,7 +19,7 @@
 %token SQRT EXPONENT INFINITY TIME EVENT NULL_EVENT PIPE EQUAL AND OR NOT
 %token GREATER SMALLER TRUE FALSE DIFF KAPPA_RAR KAPPA_LRAR KAPPA_LNK
 %token SIGNATURE INIT LET PLOT PERT OBS TOKEN CONFIG KAPPA_WLD KAPPA_SEMI
-%token FLUX ASSIGN PRINTF STOP SNAPSHOT RUN THEN ELSE ALARM
+%token FLUX ASSIGN PRINTF STOP SNAPSHOT RUN THEN ELSE ALARM APPLY
 %token <int> INT
 %token <string> ID
 %token <string> KAPPA_MRK LABEL
@@ -41,10 +41,10 @@
 %type <Ast.parsing_compil -> Ast.parsing_compil> start_rule
 
 %start interactive_command
-%type <(Ast.mixture,Ast.mixture,string) Ast.command> interactive_command
+%type <(Ast.mixture,Ast.mixture,string,Ast.rule) Ast.command> interactive_command
 
 %start standalone_effect_list
-%type <(Ast.mixture,Ast.mixture,string) Ast.modif_expr list> standalone_effect_list
+%type <(Ast.mixture,Ast.mixture,string,Ast.rule) Ast.modif_expr list> standalone_effect_list
 
 %start standalone_bool_expr
 %type <(Ast.mixture,string) Alg_expr.bool Locality.annot> standalone_bool_expr
@@ -161,7 +161,7 @@ perturbation_declaration:
     { ($1,None,$3,$4) }
     | REPEAT bool_expr DO effect_list UNTIL bool_expr
        /* backward compatibility */
-       	   {ExceptionDefn.deprecated
+	   {ExceptionDefn.deprecated
 	      ~pos:(Locality.of_pos (Parsing.symbol_start_pos ())
 				    (Parsing.symbol_end_pos ()))
 	      "perturbation"
@@ -174,6 +174,7 @@ perturbation_declaration:
 			      | Ast.FLUX _ | Ast.FLUXOFF _
 			      | Ast.SPECIES_OF _) -> true
 			   | (Ast.STOP _ | Ast.INTRO _ | Ast.DELETE _
+			     | Ast.APPLY _
 			     | Ast.UPDATE _ | Ast.UPDATE_TOK _ | Ast.PRINT _
 			     | Ast.SNAPSHOT _ | Ast.PLOTENTRY) -> false
 			  ) $4
@@ -221,6 +222,15 @@ effect:
 	   else if $4 && $3 = "relative" then Ast.FLUX (Primitives.RELATIVE,$2)
 	     else raise (ExceptionDefn.Syntax_Error
 	       ("Incorrect FLUX expression",rhs_pos 3))}
+    | APPLY small_alg_expr rule_content
+		 { Ast.APPLY(
+		   $2,
+		   ({ Ast.rewrite = fst $3;
+		      Ast.bidirectional = false;
+		      Ast.k_def=Alg_expr.const Nbr.zero;
+		      Ast.k_un=None;
+		      Ast.k_op=None; Ast.k_op_un=None},rhs_pos 3))
+		 }
     | INTRO alg_expr non_empty_mixture {Ast.INTRO ($2,($3, rhs_pos 3))}
     | INTRO error
 	{raise (ExceptionDefn.Syntax_Error
@@ -328,14 +338,14 @@ rule_content:
   | PIPE sum_token
     { Ast.Edit {Ast.mix = []; Ast.delta_token = $2},false };
 
- rule_expression:
+rule_expression:
   | rule_content birate
     { let (k_def,k_un,k_op,k_op_un) = $2 in
       let rewrite,bidirectional = $1 in
-       add_pos {
-         Ast.rewrite;Ast.bidirectional;
-         Ast.k_def; Ast.k_un; Ast.k_op; Ast.k_op_un;
-       } };
+      add_pos {
+        Ast.rewrite;Ast.bidirectional;
+        Ast.k_def; Ast.k_un; Ast.k_op; Ast.k_op_un;
+      } };
 
 arrow:
     | KAPPA_RAR {false}

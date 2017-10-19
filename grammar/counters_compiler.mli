@@ -19,7 +19,7 @@ val remove_counter_rule :
 
 val counters_perturbations :
   Signature.s -> Ast.agent list ->
-  (LKappa.rule_agent list, Raw_mixture.agent list, int) Ast.perturbation list
+  (LKappa.rule_mixture, Raw_mixture.agent list, int,LKappa.rule) Ast.perturbation list
 
 val annotate_dropped_counters :
   Signature.t -> Ast.counter list ->  LKappa.rule_agent -> int -> string ->

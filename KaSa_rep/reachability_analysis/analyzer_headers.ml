@@ -435,6 +435,9 @@ let compute_initial_state error static =
                    p e kappa_handler a
                    (alg',pos)
                    (mixture',pos') )
+              (fun p e a (alg,pos) (rule,pos')-> assert false
+              (*TODO Pirbo: rules fired by perturbation are of course
+                not like init, they are like rules !!!!*))
                 perturbation
           in
           error, List.fold_left

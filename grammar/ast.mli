@@ -81,7 +81,9 @@ type rule = {
 
 val flip_label : string -> string
 
-type ('pattern,'mixture,'id) modif_expr =
+type ('pattern,'mixture,'id,'rule) modif_expr =
+  | APPLY of
+      (('pattern,'id) Alg_expr.e Locality.annot * 'rule Locality.annot)
   | INTRO of
       (('pattern,'id) Alg_expr.e Locality.annot * 'mixture Locality.annot)
   | DELETE of
@@ -108,10 +110,10 @@ type ('pattern,'mixture,'id) modif_expr =
       (bool * ('pattern,'id) Alg_expr.e Primitives.print_expr list
        * 'pattern Locality.annot)
 
-type ('pattern,'mixture,'id) perturbation =
+type ('pattern,'mixture,'id,'rule) perturbation =
   (Nbr.t option *
    ('pattern,'id) Alg_expr.bool Locality.annot option *
-   (('pattern,'mixture,'id) modif_expr list) *
+   (('pattern,'mixture,'id,'rule) modif_expr list) *
    ('pattern,'id) Alg_expr.bool Locality.annot option)
     Locality.annot
 
@@ -129,7 +131,7 @@ type ('pattern,'mixture,'id) init_statment =
   ('pattern,'id) Alg_expr.e Locality.annot *
   ('mixture,'id) init_t Locality.annot
 
-type ('pattern,'mixture,'id) instruction =
+type ('pattern,'mixture,'id,'rule) instruction =
   | SIG      of agent
   | TOKENSIG of string Locality.annot
   | VOLSIG   of string * float * string (* type, volume, parameter*)
@@ -137,12 +139,12 @@ type ('pattern,'mixture,'id) instruction =
   | DECLARE  of ('pattern,'id) variable_def
   | OBS      of ('pattern,'id) variable_def (*for backward compatibility*)
   | PLOT     of ('pattern,'id) Alg_expr.e Locality.annot
-  | PERT     of ('pattern,'mixture,'id) perturbation
+  | PERT     of ('pattern,'mixture,'id,'rule) perturbation
   | CONFIG   of configuration
 
-type ('pattern,'mixture,'id) command =
+type ('pattern,'mixture,'id,'rule) command =
   | RUN of ('pattern,'id) Alg_expr.bool Locality.annot
-  | MODIFY of ('pattern,'mixture,'id) modif_expr list
+  | MODIFY of ('pattern,'mixture,'id,'rule) modif_expr list
   | QUIT
 
 type ('agent,'pattern,'mixture,'id,'rule) compil =
@@ -162,7 +164,7 @@ type ('agent,'pattern,'mixture,'id,'rule) compil =
     init : ('pattern,'mixture,'id) init_statment list;
     (*initial graph declaration*)
     perturbations :
-      ('pattern,'mixture,'id) perturbation list;
+      ('pattern,'mixture,'id,'rule) perturbation list;
     configurations :
       configuration list;
     tokens :
