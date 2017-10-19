@@ -87,14 +87,7 @@ let flip_label str = str^"_op"
 type ('pattern,'mixture,'id,'rule) modif_expr =
   | APPLY of
       (('pattern,'id) Alg_expr.e Locality.annot * 'rule Locality.annot)
-  | INTRO of
-      (('pattern,'id) Alg_expr.e Locality.annot * 'mixture Locality.annot)
-  | DELETE of
-      (('pattern,'id) Alg_expr.e Locality.annot * 'pattern Locality.annot)
   | UPDATE of
-      ('id Locality.annot *
-       ('pattern,'id) Alg_expr.e Locality.annot)
-  | UPDATE_TOK of
       ('id Locality.annot *
        ('pattern,'id) Alg_expr.e Locality.annot)
   | STOP of ('pattern,'id) Alg_expr.e Primitives.print_expr list
@@ -693,23 +686,8 @@ let modif_to_json filenames f_mix f_var = function
               ~filenames (Alg_expr.e_to_yojson ~filenames f_mix f_var) alg;
             Locality.annot_to_yojson
               ~filenames (rule_to_json filenames f_mix f_var) r ]
-  | INTRO (alg,mix) ->
-    `List [ `String "INTRO";
-            Locality.annot_to_yojson
-              ~filenames (Alg_expr.e_to_yojson ~filenames f_mix f_var) alg;
-            Locality.annot_to_yojson ~filenames f_mix mix ]
-  | DELETE (alg,mix) ->
-    `List [ `String "DELETE";
-            Locality.annot_to_yojson
-              ~filenames (Alg_expr.e_to_yojson ~filenames f_mix f_var) alg;
-            Locality.annot_to_yojson ~filenames f_mix mix ]
   | UPDATE (id,alg) ->
     `List [ `String "UPDATE";
-            Locality.annot_to_yojson ~filenames f_var id;
-            Locality.annot_to_yojson
-              ~filenames (Alg_expr.e_to_yojson ~filenames f_mix f_var) alg ]
-  | UPDATE_TOK (id,alg) ->
-    `List [ `String "UPDATE_TOK";
             Locality.annot_to_yojson ~filenames f_var id;
             Locality.annot_to_yojson
               ~filenames (Alg_expr.e_to_yojson ~filenames f_mix f_var) alg ]
@@ -753,26 +731,11 @@ let modif_of_json filenames f_mix f_var = function
           ~filenames (Alg_expr.e_of_yojson ~filenames f_mix f_var) alg,
         Locality.annot_of_yojson
           ~filenames (rule_of_json filenames f_mix f_var) mix)
-  | `List [ `String "INTRO"; alg; mix ] ->
-     INTRO
-       (Locality.annot_of_yojson
-          ~filenames (Alg_expr.e_of_yojson ~filenames f_mix f_var) alg,
-        Locality.annot_of_yojson ~filenames f_mix mix)
-  | `List [ `String "DELETE"; alg; mix ] ->
-    DELETE
-      (Locality.annot_of_yojson
-         ~filenames (Alg_expr.e_of_yojson ~filenames f_mix f_var) alg,
-       Locality.annot_of_yojson ~filenames f_mix mix)
   | `List [ `String "UPDATE"; id; alg ] ->
     UPDATE
       (Locality.annot_of_yojson ~filenames f_var id,
        Locality.annot_of_yojson
          ~filenames (Alg_expr.e_of_yojson ~filenames f_mix f_var) alg)
-  | `List [ `String "UPDATE_TOK"; id; alg ] ->
-     UPDATE_TOK
-       (Locality.annot_of_yojson ~filenames f_var id,
-        Locality.annot_of_yojson
-          ~filenames (Alg_expr.e_of_yojson ~filenames f_mix f_var) alg)
   | `List (`String "STOP" :: l) ->
     STOP (List.map (Primitives.print_expr_of_yojson ~filenames f_mix f_var) l)
   | `List (`String "SNAPSHOT" :: l) ->
@@ -875,11 +838,7 @@ let sig_from_perts =
        List.fold_left
          (fun (ags,toks as p) -> function
             | APPLY (_,(r,_)) -> sig_from_rule p r
-            | INTRO (_,(m,_)) ->
-              (merge_agents ags m,toks)
-            | UPDATE_TOK (t,na) ->
-              (ags,merge_tokens toks [na,t])
-            | (DELETE _ | UPDATE _ | STOP _ | SNAPSHOT _ | PRINT _ | PLOTENTRY |
+            | (UPDATE _ | STOP _ | SNAPSHOT _ | PRINT _ | PLOTENTRY |
                CFLOWLABEL _ | CFLOWMIX _ | FLUX _ | FLUXOFF _ | SPECIES_OF _) ->
                p)
          acc p)

@@ -84,14 +84,7 @@ val flip_label : string -> string
 type ('pattern,'mixture,'id,'rule) modif_expr =
   | APPLY of
       (('pattern,'id) Alg_expr.e Locality.annot * 'rule Locality.annot)
-  | INTRO of
-      (('pattern,'id) Alg_expr.e Locality.annot * 'mixture Locality.annot)
-  | DELETE of
-      (('pattern,'id) Alg_expr.e Locality.annot * 'pattern Locality.annot)
   | UPDATE of
-      ('id Locality.annot * ('pattern,'id) Alg_expr.e Locality.annot)
-  (*TODO: pause*)
-  | UPDATE_TOK of
       ('id Locality.annot * ('pattern,'id) Alg_expr.e Locality.annot)
   (*TODO: pause*)
   | STOP of ('pattern,'id) Alg_expr.e Primitives.print_expr list

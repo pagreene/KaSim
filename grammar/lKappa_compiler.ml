@@ -772,16 +772,6 @@ let modif_expr_of_ast
           sigs tok algs mix cmix rm_tok add_tok
           r.Ast.k_def r.Ast.k_un,pos)),
     acc
-  | Ast.INTRO (how,(who,pos)) ->
-    Ast.INTRO
-      (alg_expr_of_ast ~syntax_version sigs tok algs how,
-       (raw_mixture_of_ast ~syntax_version sigs ~contact_map who,pos)),
-    acc
-  | Ast.DELETE (how,(who,pos)) ->
-    Ast.DELETE
-      (alg_expr_of_ast ~syntax_version sigs tok algs how,
-       (mixture_of_ast ~syntax_version sigs pos who,pos)),
-    acc
   | Ast.UPDATE ((lab,pos),how) ->
     let i =
       match Mods.StringMap.find_option lab algs with
@@ -793,17 +783,6 @@ let modif_expr_of_ast
       ((i,pos),
        alg_expr_of_ast ~syntax_version sigs tok algs how),
     i::acc
-  | Ast.UPDATE_TOK ((lab,pos),how) ->
-    let i =
-      match Mods.StringMap.find_option lab tok with
-      | Some x -> x
-      | None ->
-        raise (ExceptionDefn.Malformed_Decl
-                 (lab ^" is not a declared token",pos)) in
-    Ast.UPDATE_TOK
-      ((i,pos),
-       alg_expr_of_ast ~syntax_version sigs tok algs how),
-    acc
   | Ast.STOP p ->
     Ast.STOP
       (List.map

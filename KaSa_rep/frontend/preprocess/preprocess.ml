@@ -1787,7 +1787,6 @@ let translate_perturb parameters error handler ((alarm,bool1,modif,bool2),pos2) 
              (fun error (_,pos as x) ->
                 let err,r = translate_rule parameters error handler (None,x) in
                 err,(r.Cckappa_sig.e_rule_c_rule,pos))
-             (lift_forbidding_question_marks parameters handler)
              (lift_allowing_question_marks parameters handler) error elt in
          error,elt'::l)
       (error,[]) (List.rev modif)

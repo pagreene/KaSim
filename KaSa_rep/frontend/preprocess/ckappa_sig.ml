@@ -1009,18 +1009,13 @@ let array_of_list_rule_id create set parameters error list =
   in aux list dummy_rule_id a
 
 let introduceable_species_in_pertubation
-    parameter error f_add f_rule ((_,_,list,_),_) =
+    parameter error f_rule ((_,_,list,_),_) =
    List.fold_left
     (fun (error,list) -> function
        | Ast.APPLY (a,b) ->
          let error, elt = f_rule parameter error None a b in
           error, elt::list
-       | Ast.INTRO (a,b) ->
-         let error, elt = f_add parameter error None a b in
-         error, elt::list
-       | Ast.DELETE _
        | Ast.UPDATE _
-       | Ast.UPDATE_TOK _
        | Ast.STOP _
        | Ast.SNAPSHOT _
        (*maybe later of mixture too*)

@@ -173,9 +173,8 @@ perturbation_declaration:
 			   | (Ast.CFLOWLABEL _ | Ast.CFLOWMIX _
 			      | Ast.FLUX _ | Ast.FLUXOFF _
 			      | Ast.SPECIES_OF _) -> true
-			   | (Ast.STOP _ | Ast.INTRO _ | Ast.DELETE _
-			     | Ast.APPLY _
-			     | Ast.UPDATE _ | Ast.UPDATE_TOK _ | Ast.PRINT _
+			   | (Ast.STOP _ | Ast.APPLY _
+			     | Ast.UPDATE _ | Ast.PRINT _
 			     | Ast.SNAPSHOT _ | Ast.PLOTENTRY) -> false
 			  ) $4
 		     then
@@ -227,20 +226,48 @@ effect:
 		   $2,
 		   ({ Ast.rewrite = fst $3;
 		      Ast.bidirectional = false;
-		      Ast.k_def=Alg_expr.const Nbr.zero;
-		      Ast.k_un=None;
+		      Ast.k_def=Alg_expr.const Nbr.zero;Ast.k_un=None;
 		      Ast.k_op=None; Ast.k_op_un=None},rhs_pos 3))
 		 }
-    | INTRO alg_expr non_empty_mixture {Ast.INTRO ($2,($3, rhs_pos 3))}
+    | INTRO alg_expr non_empty_mixture
+        { Ast.APPLY($2,
+                ({Ast.rewrite =
+		  Ast.Arrow {Ast.lhs=[]; Ast.rm_token = [];
+                  Ast.rhs=$3; Ast.add_token = [];};
+		  Ast.bidirectional=false;
+                  Ast.k_def=Alg_expr.const Nbr.zero; Ast.k_un=None;
+                  Ast.k_op=None; Ast.k_op_un=None},rhs_pos 3))
+        }
     | INTRO error
-	{raise (ExceptionDefn.Syntax_Error
-		  (add_pos "Malformed perturbation instruction, I was expecting '$ADD alg_expression kappa_expression'"))}
-    | DELETE alg_expr non_empty_mixture {Ast.DELETE ($2,($3, rhs_pos 3))}
+       {raise (ExceptionDefn.Syntax_Error
+                 (add_pos "Malformed perturbation instruction, I was expecting '$ADD alg_expression kappa_expression'"))}
+    | DELETE alg_expr non_empty_mixture
+       { Ast.APPLY($2,
+               ({Ast.rewrite =
+		 Ast.Arrow {Ast.lhs=$3; Ast.rm_token = [];
+                 Ast.rhs=[]; Ast.add_token = [];};
+		 Ast.bidirectional=false;
+                 Ast.k_def=Alg_expr.const Nbr.zero; Ast.k_un=None;
+                 Ast.k_op=None; Ast.k_op_un=None},rhs_pos 3))
+       }
+
     | DELETE error
-	{raise (ExceptionDefn.Syntax_Error
-		  (add_pos "Malformed perturbation instruction, I was expecting '$DEL alg_expression kappa_expression'"))}
+       {raise (ExceptionDefn.Syntax_Error
+                 (add_pos "Malformed perturbation instruction, I was expecting '$DEL alg_expression kappa_expression'"))}
     | ID LAR alg_expr /*updating the value of a token*/
-						{Ast.UPDATE_TOK (($1,rhs_pos 1),$3)}
+       {
+       let tk = ($1,rhs_pos 1) in
+        Ast.APPLY(Alg_expr.const Nbr.one,
+           add_pos
+               ({Ast.rewrite =
+		 Ast.Arrow
+		 {Ast.lhs=[];
+		  Ast.rm_token = [(Alg_expr.TOKEN_ID $1,rhs_pos 1),tk];
+                  Ast.rhs=[]; Ast.add_token = [$3,tk];};
+                 Ast.bidirectional=false;
+                 Ast.k_def=Alg_expr.const Nbr.zero; Ast.k_un=None;
+                 Ast.k_op=None; Ast.k_op_un=None}))
+       }
     | SNAPSHOT print_expr {Ast.SNAPSHOT $2}
     | STOP print_expr {Ast.STOP $2}
     | PRINTF print_expr SMALLER print_expr GREATER { Ast.PRINT ($2,$4) }

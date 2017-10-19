@@ -453,11 +453,10 @@ let scan_perts scan_mixt parameters =
                 parameters
                 (scan_mixt parameters remanent r.Ckappa_sig.lhs)
                 r.Ckappa_sig.rhs
-            | (Ast.INTRO (_,(m,_)) | Ast.DELETE(_,(m,_))
-              | Ast.CFLOWMIX (_,(m,_))) | Ast.SPECIES_OF (_,_,(m,_))->
+            | (Ast.CFLOWMIX (_,(m,_))) | Ast.SPECIES_OF (_,_,(m,_))->
               scan_mixt parameters remanent m
             | Ast.UPDATE _ | Ast.STOP _ | Ast.SNAPSHOT _ | Ast.PLOTENTRY
-            | Ast.UPDATE_TOK _ | Ast.PRINT _ | Ast.CFLOWLABEL _
+            | Ast.PRINT _ | Ast.CFLOWLABEL _
             | Ast.FLUXOFF _ | Ast.FLUX _ -> remanent
          ) remanent m)
 
