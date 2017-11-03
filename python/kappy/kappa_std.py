@@ -38,6 +38,7 @@ class KappaStd(object):
                                       stdin=subprocess.PIPE,
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.STDOUT)
+        return
 
     def __del__(self):
         self.shutdown()
@@ -81,11 +82,12 @@ class KappaStd(object):
         pass
 
     def shutdown(self):
-        self.popen.stdin.close()
-        self.popen.stdout.close()
-        self.popen.kill()
+        if hasattr(self, 'popen'):
+            self.popen.stdin.close()
+            self.popen.stdout.close()
+            self.popen.kill()
 
-    def projection(self,response):
+    def projection(self, response):
         result_data = response["data"]["result_data"]
         data = result_data[1]
         if result_data[0] == "Ok":
