@@ -293,6 +293,9 @@ class KappaStd(object):
         return self._dispatch("SimulationContinue",pause_condition)
 
     def _analyses_init(self):
+        """
+        Initialize the static analyser thanks to the result of project_parse
+        """
         if self.project_ast is None:
             raise KappaError("Project not parsed since last modification")
         result = self._dispatch_sa("INIT",self.project_ast)
@@ -300,6 +303,30 @@ class KappaStd(object):
         return result
 
     def analyses_dead_rules(self):
+        """
+        Returns the dead rules of the last parsed model
+        """
         if self.analyses_to_init:
             self._analyses_init()
         return self._dispatch_sa("DEAD_RULES")
+
+    def analyses_constraints_list(self):
+        """
+        Returns a bunch of invarients on the last parsed model
+        """
+        if self.analyses_to_init:
+            self._analyses_init()
+        return self._dispatch_sa("CONSTRAINTS")
+
+    def analyses_contact_map(self,accuracy=None):
+        """
+        Returns the contact of the last parsed model
+
+        Input
+        -----
+        accuracy -- \"high\" means take reachability from initial state
+           into account. \"low\" means don't.
+        """
+        if self.analyses_to_init:
+            self._analyses_init()
+        return self._dispatch_sa("CONTACT_MAP",accuraccy)
