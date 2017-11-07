@@ -22,7 +22,7 @@ from util import run_example_case, run_nose
 
 def test_example_case():
     """Run a simple example case using kappa_rest."""
-    client = KappaRest("http://127.0.0.1:6666", '__test')
+    client = KappaRest("http://127.0.0.1:8080", '__test')
     results = run_example_case(client)
     assert len(results), "Simulation didn't do anything."
 

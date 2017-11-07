@@ -1,9 +1,5 @@
 """Integration test for kappa clients"""
 import json
-import urllib
-import urllib.error
-import urllib.request
-import urllib.parse
 import unittest
 import subprocess
 import random
@@ -17,6 +13,11 @@ def file_catalog_file_id (file_catalog):
     return(map((lambda entry: entry.id),file_catalog))
 
 class KappaClientTest(object):
+    '''
+    Doc string
+    '''
+
+    '''
     def check_integration_test(self, integration_test):
         """ run an integration test by requesting a url with
             a given method and checking the response code.
@@ -31,6 +32,7 @@ class KappaClientTest(object):
         request.get_method = lambda : method
         connection = opener.open(request)
         self.assertEqual(connection.code, integration_test['code'])
+        '''
 
 
     # def test_project_crud(self):
@@ -73,7 +75,7 @@ class KappaClientTest(object):
         runtime = self.getRuntime(project_id)
         file_1_id = str(uuid.uuid1())
         file_2_id = str(uuid.uuid1())
-        test_dir = "../../models/test_suite/compiler/file_order/"
+        test_dir = "models/test_suite/compiler/file_order/"
         with open(test_dir+"file2.ka") as file_2:
             with open(test_dir+"file1.ka") as file_1:
                 data_1 = file_1.read()
@@ -95,7 +97,7 @@ class KappaClientTest(object):
         project_id = str(uuid.uuid1())
         runtime = self.getRuntime(project_id)
         file_id = str(uuid.uuid1())
-        with open("../../models/abc-pert.ka") as kappa_file:
+        with open("../models/abc-pert.ka") as kappa_file:
             data = kappa_file.read()
             file_content = str(data)
             file_metadata = kappy.FileMetadata(file_id,0)
@@ -161,19 +163,21 @@ class RestClientTest(KappaClientTest,unittest.TestCase):
     @classmethod
     def setUpClass(self):
         """ set up unit test by launching client"""
-        self.websim = "../../bin/WebSim"
+        self.websim = "../bin/WebSim"
         self.key = self.generate_key()
         self.port = 6666
         command_format = "{0} --shutdown-key {1} --port {2} --level debug"
         subprocess.Popen(command_format.format(self.websim, self.key, self.port).split())
         time.sleep(1)
         self.endpoint = "http://127.0.0.1:{0}".format(self.port)
-    def getRuntime(self,project_id):
-        return(kappy.KappaRest(self.endpoint,project_id))
+
+    def getRuntime(self, project_id):
+        return(kappy.KappaRest(self.endpoint, project_id))
+
     @classmethod
     def tearDownClass(self):
         """ tear down test by shutting down"""
-        runtime = self.getRuntime(self,"__foo")
+        runtime = self.getRuntime(self, "__foo")
         print(runtime.shutdown(self.key))
 
     @classmethod
@@ -196,7 +200,7 @@ class RestClientTest(KappaClientTest,unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         """ initalize test by launching kappa server """
-        self.websim = "../../WebSim.native"
+        self.websim = "../WebSim.native"
         self.key = self.generate_key()
         self.port = 6666
         super(KappaClientTest, self).__init__(*args, **kwargs)

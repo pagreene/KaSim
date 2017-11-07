@@ -3,9 +3,10 @@
 
 import sys
 import os
+from kappy import File, SimulationParameter
 
-TEST_MODEL = ("%agent: A(x)\n A(x), A(x) <-> A(x!1), A(x!1) @ 1e-2, 1\n "
-              "%init: 100 A()\n %plot: |A(x)|")
+TEST_MODEL = ("%agent: A(x)\n A(x[.]), A(x[.]) <-> A(x[1]), A(x[1]) @ 1e-2, 1\n "
+              "%init: 100 A()\n %plot: |A(x[.])|")
 
 
 def run_example_case(client):
