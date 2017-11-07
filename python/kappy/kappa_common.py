@@ -186,5 +186,5 @@ class PlotLimit(object):
 class KappaError(Exception):
     """ Error returned from the Kappa server"""
     def __init__(self, errors):
-        Exception.__init__(self)
+        Exception.__init__(self, errors)
         self.errors = errors
