@@ -14,7 +14,7 @@ import uuid
 import kappy
 
 def file_catalog_file_id (file_catalog):
-    return(map((lambda entry: entry.file_metadata_id),file_catalog))
+    return(map((lambda entry: entry.id),file_catalog))
 
 class KappaClientTest(object):
     def check_integration_test(self, integration_test):
