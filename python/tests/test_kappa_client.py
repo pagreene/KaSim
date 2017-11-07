@@ -1,99 +1,77 @@
 """Integration test for kappa clients"""
 import json
 import unittest
-import subprocess
 import random
 import string
 import time
 import uuid
 
+from os.path import dirname, join, normpath, pardir
+from subprocess import call
+
 import kappy
+from util import run_nose
 
-def file_catalog_file_id (file_catalog):
-    return(map((lambda entry: entry.id),file_catalog))
-
-class KappaClientTest(object):
-    '''
-    Doc string
-    '''
-
-    '''
-    def check_integration_test(self, integration_test):
-        """ run an integration test by requesting a url with
-            a given method and checking the response code.
-        """
-        method = integration_test['method']
-        handler = urllib.request.HTTPHandler()
-        opener = urllib.request.build_opener(handler)
-        url = "{0}{1}".format(self.endpoint, integration_test['url'])
-        arguments = integration_test['arguments']
-        request = urllib.request.Request(url,
-                                         integration_test['arguments'])
-        request.get_method = lambda : method
-        connection = opener.open(request)
-        self.assertEqual(connection.code, integration_test['code'])
-        '''
+KASIM_DIR = normpath(join(dirname(__file__), [pardir]*3))
+MODEL_DIR = join(KASIM_DIR, 'models')
 
 
-    # def test_project_crud(self):
-    #     runtime = self.getRuntime()
-    #     project_id = str(uuid.uuid1())
-    #     runtime.project_create(project_id)
-    #     print(project_id)
-    #     project_ids = kappa_client.project_catalog_project_id(runtime.project_info())
-    #     self.assertIn(project_id,project_ids)
-    #     print(runtime.project_info())
-    #     runtime.project_delete(project_id)
-    #     self.assertNotIn(project_id,runtime.project_info())
-    #     try:
-    #         runtime.project_delete(project_id)
-    #         self.fail()
-    #     except kappy.KappaError as exception:
-    #         None
+def _get_test_file(fname):
+    return join(MODEL_DIR, "test_suite", "compiler", "file_order", fname)
+
+
+def _get_id(name):
+    return "%s-%s" % (name, uuid.uuid1())
+
+
+def _create_runtime_file(file_name, data):
+    file_id = _get_id(file_name)
+    file_obj = kappy.File(dict(id=file_id, position=0), data)
+    runtime.file_create(file_obj)
+    return file_id, file_obj
+
+
+class _KappaClientTest(unittest.TestCase):
 
     def test_file_crud(self):
-        project_id = str(uuid.uuid1())
-        runtime = self.getRuntime(project_id)
-        file_id = str(uuid.uuid1())
-        file_content = str("")
-        file_metadata = kappy.FileMetadata(file_id,0)
-        file_object = kappy.File(file_metadata,file_content)
-        runtime.file_create(file_object)
-        file_names = file_catalog_file_id(runtime.file_info())
-        self.assertIn(file_id,file_names)
-        self.assertEqual(runtime.file_get(file_id).get_content(),
-                         file_content)
+        print("Getting the runtime object...")
+        runtime = self.getRuntime(project_id=_get_id('test_proj'))
+
+        print("Creating the file...")
+        file_id, _ = _create_runtime_file(_get_id('test_file'), b"")
+
+        print("Getting the file names")
+        file_names = [entry.id for entry in runtime.file_info()]
+
+        print("Running checks...")
+        self.assertIn(file_id, file_names)
+        self.assertEqual(runtime.file_get(file_id).get_content(), file_content)
         runtime.file_delete(file_id)
         try:
             runtime.file_delete(file_id)
             self.fail()
         except:
-            None
+            pass
 
-    def parse_multiple_files(self):
-        project_id = str(uuid.uuid1())
-        runtime = self.getRuntime(project_id)
-        file_1_id = str(uuid.uuid1())
-        file_2_id = str(uuid.uuid1())
-        test_dir = "models/test_suite/compiler/file_order/"
-        with open(test_dir+"file2.ka") as file_2:
-            with open(test_dir+"file1.ka") as file_1:
-                data_1 = file_1.read()
-                file_1_metadata = kappy.FileMetadata(file_1_id,0)
-                file_1_object = kappy.File(file_1_metadata,data_1)
-                runtime.file_create(file_1_object)
+    def test_parse_multiple_files(self):
+        runtime = self.getRuntime(project_id=_get_id('test_proj'))
+        with open(_get_test_file('file2.ka'), 'r') as f2:
+            f2_str = f2.read()
+        with open(_get_test_file('file1.ka'), 'r') as f1:
+            f1_str = f1.read()
 
-                data_2 = file_2.read()
-                file_2_metadata = kappy.FileMetadata(file_2_id,0)
-                file_2_object = kappy.File(file_2_metadata,data_2)
-                runtime.project_parse()
-                with self.assertRaises(kappy.KappaError):
-                    runtime.file_create(file_2_object)
-                file_names = list(file_catalog_file_id(runtime.file_info()))
-                self.assertIn(file_1_id,file_names)
-                self.assertIn(file_2_id,file_names)
+        file_1_id, _ = _create_runtime_file('test_file_1', f1_str)
+        file_2_id, file_2_obj = _create_runtime_file('test_file_2', f2_str)
 
-    def test_run_simulationd(self):
+        runtime.project_parse()
+        with self.assertRaises(kappy.KappaError):
+            runtime.file_create(file_2_obj)
+        file_names = [entry.id for entry in runtime.file_info()]
+        self.assertIn(file_1_id,file_names)
+        self.assertIn(file_2_id,file_names)
+        return
+
+    def test_run_simulation(self):
         project_id = str(uuid.uuid1())
         runtime = self.getRuntime(project_id)
         file_id = str(uuid.uuid1())
@@ -158,27 +136,36 @@ class KappaClientTest(object):
             self.assertEqual(351, len(last_status['series']))
 
 
-class RestClientTest(KappaClientTest,unittest.TestCase):
+class RestClientTest(_KappaClientTest):
     """ Integration test for kappa client"""
-    @classmethod
-    def setUpClass(self):
-        """ set up unit test by launching client"""
+
+    def __init__(self, *args, **kwargs):
+        """ initalize test by launching kappa server """
         self.websim = "../bin/WebSim"
         self.key = self.generate_key()
         self.port = 6666
-        command_format = "{0} --shutdown-key {1} --port {2} --level debug"
-        subprocess.Popen(command_format.format(self.websim, self.key, self.port).split())
+        self.endpoint = "http://127.0.0.1:%s" % self.port
+        super(RestClientTest, self).__init__(*args, **kwargs)
+
+    def setUp(self):
+        """ set up unit test by launching client"""
+        call([
+            self.websim,
+            '--shutdown-key', str(self.key),
+            '--port', str(self.port),
+            '--level', 'debug'
+            ])
         time.sleep(1)
-        self.endpoint = "http://127.0.0.1:{0}".format(self.port)
+        return
 
     def getRuntime(self, project_id):
-        return(kappy.KappaRest(self.endpoint, project_id))
+        return kappy.KappaRest(self.endpoint, project_id)
 
-    @classmethod
-    def tearDownClass(self):
+    def tearDown(self):
         """ tear down test by shutting down"""
-        runtime = self.getRuntime(self, "__foo")
-        print(runtime.shutdown(self.key))
+        runtime = self.getRuntime("__foo")
+        resp = runtime.shutdown(self.key)
+        print(resp)
 
     @classmethod
     def generate_key(cls):
@@ -189,38 +176,27 @@ class RestClientTest(KappaClientTest,unittest.TestCase):
                        for _ in range(100))
 
     def test_info(self):
-        """ the the ability of the server to return
-            information about the service.
-        """
+        """Check if the server can return information about the service."""
         project_id = str(uuid.uuid1())
         runtime = self.getRuntime(project_id)
         info = runtime.get_info()
         self.assertIsNotNone('environment_projects' in info)
         self.assertIsNotNone('environment_build' in info)
 
-    def __init__(self, *args, **kwargs):
-        """ initalize test by launching kappa server """
-        self.websim = "../WebSim.native"
-        self.key = self.generate_key()
-        self.port = 6666
-        super(KappaClientTest, self).__init__(*args, **kwargs)
 
-class StdClientTest(KappaClientTest,unittest.TestCase):
+class StdClientTest(_KappaClientTest):
     """ Integration test for kappa client"""
-    @classmethod
-    def setUpClass(self):
-        """ set up unit test by launching client"""
 
-    def getRuntime(self,project_id):
-        return(kappy.KappaStd())
-    @classmethod
-    def tearDownClass(self):
+    def getRuntime(self, project_id):
+        return kappy.KappaStd()
+
+    def tearDown(self):
         """ tear down test by shutting down"""
-        runtime = self.getRuntime(self,"__foo")
-        print(runtime.shutdown())
+        runtime = self.getRuntime("__foo")
+        resp = runtime.shutdown()
+        print(resp)
+        return
 
-    def __init__(self, *args, **kwargs):
-        super(KappaClientTest, self).__init__(*args, **kwargs)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    run_nose(__file__)
