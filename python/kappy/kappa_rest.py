@@ -29,7 +29,10 @@ class KappaRest(object):
         return
 
     def __del__(self):
-        self._project_delete()
+        try:
+            self._project_delete()
+        except Exception:
+            print("Failed to delete project. Probably already deleted.")
 
     def _dispatch(self, method, sub_url=None, data=None):
         if sub_url is not None:
@@ -76,7 +79,7 @@ class KappaRest(object):
         """
         parse_url = "{0}/shutdown".format(self.url)
         try:
-            r = request("POST",parse_url, data=key.encode('utf-8'))
+            r = request("POST", parse_url, data=key.encode('utf-8'))
         except exceptions.URLError as exception:
             raise KappaError(exception.reason)
         if r.status_code == 200:
