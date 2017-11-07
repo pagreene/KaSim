@@ -6,13 +6,14 @@ import string
 import time
 import uuid
 
-from os.path import dirname, join, normpath, pardir
-from subprocess import call
+from os.path import dirname, join, normpath, pardir, basename, abspath
+from subprocess import Popen
 
 import kappy
 from util import run_nose
 
-KASIM_DIR = normpath(join(dirname(__file__), [pardir]*3))
+KASIM_DIR = normpath(join(dirname(abspath(__file__)), *([pardir]*2)))
+assert basename(KASIM_DIR) == 'KaSim', "%s is not KaSim directory." % KASIM_DIR
 MODEL_DIR = join(KASIM_DIR, 'models')
 
 
@@ -24,7 +25,7 @@ def _get_id(name):
     return "%s-%s" % (name, uuid.uuid1())
 
 
-def _create_runtime_file(file_name, data):
+def _create_runtime_file(runtime, file_name, data):
     file_id = _get_id(file_name)
     file_obj = kappy.File(dict(id=file_id, position=0), data)
     runtime.file_create(file_obj)
@@ -38,19 +39,21 @@ class _KappaClientTest(unittest.TestCase):
         runtime = self.getRuntime(project_id=_get_id('test_proj'))
 
         print("Creating the file...")
-        file_id, _ = _create_runtime_file(_get_id('test_file'), b"")
+        empty_content = ""
+        file_id, _ = _create_runtime_file(runtime, _get_id('test_file'),
+                                          empty_content)
 
         print("Getting the file names")
         file_names = [entry.id for entry in runtime.file_info()]
 
         print("Running checks...")
         self.assertIn(file_id, file_names)
-        self.assertEqual(runtime.file_get(file_id).get_content(), file_content)
+        self.assertEqual(runtime.file_get(file_id).get_content(), empty_content)
         runtime.file_delete(file_id)
         try:
             runtime.file_delete(file_id)
             self.fail()
-        except:
+        except kappy.KappaError:
             pass
 
     def test_parse_multiple_files(self):
@@ -60,8 +63,9 @@ class _KappaClientTest(unittest.TestCase):
         with open(_get_test_file('file1.ka'), 'r') as f1:
             f1_str = f1.read()
 
-        file_1_id, _ = _create_runtime_file('test_file_1', f1_str)
-        file_2_id, file_2_obj = _create_runtime_file('test_file_2', f2_str)
+        file_1_id, _ = _create_runtime_file(runtime, 'test_file_1', f1_str)
+        file_2_id, file_2_obj = _create_runtime_file(runtime, 'test_file_2',
+                                                     f2_str)
 
         runtime.project_parse()
         with self.assertRaises(kappy.KappaError):
@@ -141,7 +145,7 @@ class RestClientTest(_KappaClientTest):
 
     def __init__(self, *args, **kwargs):
         """ initalize test by launching kappa server """
-        self.websim = "../bin/WebSim"
+        self.websim = join(KASIM_DIR, "bin", "WebSim")
         self.key = self.generate_key()
         self.port = 6666
         self.endpoint = "http://127.0.0.1:%s" % self.port
@@ -149,13 +153,15 @@ class RestClientTest(_KappaClientTest):
 
     def setUp(self):
         """ set up unit test by launching client"""
-        call([
+        print("Starting server...")
+        Popen([
             self.websim,
-            '--shutdown-key', str(self.key),
+            '--shutdown-key', self.key,
             '--port', str(self.port),
-            '--level', 'debug'
+            '--level', 'fatal'
             ])
         time.sleep(1)
+        print("Started...")
         return
 
     def getRuntime(self, project_id):
@@ -164,8 +170,10 @@ class RestClientTest(_KappaClientTest):
     def tearDown(self):
         """ tear down test by shutting down"""
         runtime = self.getRuntime("__foo")
+        print("Closing server...")
         resp = runtime.shutdown(self.key)
-        print(resp)
+        print("Closed", resp)
+        time.sleep(1)
 
     @classmethod
     def generate_key(cls):
